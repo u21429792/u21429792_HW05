@@ -1,0 +1,60 @@
+﻿@model u21429792_HW05.Models.StudentsVM
+
+<h2>Students</h2>
+
+@using (Html.BeginForm("Students", "Home", FormMethod.Post))
+{
+    <form class="row g-3">
+        <div class="col-md-3">
+            <input type="text" name="SName" placeholder="Search Student Name" class="form-control" id=" @Model.Students.Select(s => s.SName))">
+        </div>
+
+        <div class="col-md-2">
+            <select class="form-select" aria-label="Select options" name="class1">
+                <option selected>Select a Type</option>
+                @foreach (var student in Model.Students)
+                {
+                    <option value="@student.SID"> @student.SClass</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" value="Search" />
+        </div>
+
+        <div class="col-md-2">
+            <input type="reset" class="btn btn-danger" value="Clear">
+        </div>
+
+    </form>
+
+}
+
+<div class="col-md-12">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Class</th>
+                <th scope="col">Points</th>
+                <th scope="col">Borrow/ Return book</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students)
+            {
+              <tr>
+                <td>@student.SID</td>
+                <td>@student.SName</td>
+                <td>@student.SSurname</td>
+                <td>@student.SClass</td>
+                <td>@student.SPoint</td>
+                <td>@Html.ActionLink("Borrow", "BookDetails", "Home", new { borrow = student.BOID}, null)</td>
+              </tr>
+            }
+        </tbody>
+    </table>
+</div>

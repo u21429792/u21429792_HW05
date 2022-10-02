@@ -1,0 +1,78 @@
+﻿@model u21429792_HW05.Models.BookRecordsVM
+
+<h2>Books</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+<form class="row">
+    <div class="col-lg-2">
+        <input type="text" name="BTitle" placeholder="Search Book Name" class="form-control" @*id="@Model.Books.Select(b => b.Title))"*@>
+    </div>
+
+    <div class="col-lg-2">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type">
+            <option selected>Select a Type</option>
+            @foreach (var type in Model.Types)
+            {
+                <option value="@type.TID" > @type.TName</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-lg-2">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="author">
+            <option selected>Select an Author </option>
+            @foreach (var author in Model.Authors)
+            {
+                <option value="@author.AID"> @author.ASurname</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-lg-3">
+        <input type="submit" class="btn btn-success" value="Search"/>
+    </div>
+
+    <div class="col-lg-3">
+        <input type="reset" class="btn btn-danger" value="Clear"/>
+    </div>
+
+</form>
+
+ }
+
+<hr/>
+
+
+  <div class="col-md-12">
+   <table class="table">
+     <thead class="thead-dark">
+       <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Type</th>
+          <th scope="col">Page Count</th>
+          <th scope="col">Points</th>
+          <th scope="col">Status</th>
+          <th scope="col"> </th>
+       </tr>
+     </thead>
+     <tbody>
+     @* table populated with each property for book view table *@
+       @foreach (var books in Model.Books)
+        {
+          <tr>
+            <td>@books.BID</td>
+            <td>@books.Title</td>
+            <td>@books.Author</td>
+            <td>@books.Type</td>
+            <td>@books.PageCount</td>
+            <td>@books.Points</td>
+            <td>@books.Status</td>
+            <td>@Html.ActionLink("View ", "BookDetails", "Home", new { bookID = books.BID}, null)</td>
+          </tr>
+        }
+     </tbody>
+   </table>
+  </div>

@@ -1,0 +1,38 @@
+﻿@model u21429792_HW05.Models.OneBookVM
+
+<h2>@Model.BookDetailTables.Select(b => b.Title).ToList().FirstOrDefault() @Model.BookDetailTables.Select(s => s.Status).ToList().FirstOrDefault()</h2>
+
+@Html.ActionLink("View Students", "Students", "Home")
+
+<h3> # Borrow - @Model.Borrows.Select(si => si.BOID).ToList().FirstOrDefault()</h3>
+
+
+<div class="col-md-12">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Taken Date</th>
+                <th scope="col">Brought Date</th>
+                <th scope="col">Borrowed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var books in Model.BookDetailTables)
+            {
+                <tr>
+                    <td>@books.BOID</td>
+
+                    <td>@books.TakenDate</td>
+
+                    <td>@books.ReturnDate</td>
+
+                    <td>@books.Student</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
